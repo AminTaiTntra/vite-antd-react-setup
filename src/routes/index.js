@@ -9,6 +9,9 @@ import WithAuthenticationLayout from "../core/layout/theme";
 import PrivateRoute from "./privateRoute";
 import RouteFallback from "../core/layout/theme/fallbackRoute";
 import CustomErrorBoundary from "../core/layout/theme/errorBoundary";
+import { Posts } from "../modules/posts";
+import { CreatePost } from "../modules/posts/createPosts";
+import { PostById } from "../modules/posts/productsById";
 
 // const ResetPassword = loadable(
 //   () => import("../modules/authentication/resetPassword/resetPassword"),
@@ -28,9 +31,7 @@ const Login = loadable(() => import("../modules/authentication/login"), {
 const AppRoutes = () => {
   const dispatch = useDispatch();
 
-  const isAuthenticated = useSelector((state) =>
-    Boolean(state?.login?.accessToken)
-  );
+  const isAuthenticated = useSelector((state) => Boolean(state?.login?.accessToken));
 
   return (
     <BrowserRouter>
@@ -38,7 +39,7 @@ const AppRoutes = () => {
         <Route
           path={"/"}
           element={
-            <ErrorBoundary key="/" FallbackComponent={CustomErrorBoundary}>
+            <ErrorBoundary key='/' FallbackComponent={CustomErrorBoundary}>
               <Login />
             </ErrorBoundary>
           }
@@ -54,17 +55,14 @@ const AppRoutes = () => {
                 bypassPermission,
                 sidebarHighlightKey,
               },
-              index
+              index,
             ) => {
               return (
                 <Route
                   key={index}
                   path={path}
                   element={
-                    <ErrorBoundary
-                      key={path}
-                      FallbackComponent={CustomErrorBoundary}
-                    >
+                    <ErrorBoundary key={path} FallbackComponent={CustomErrorBoundary}>
                       <PrivateRoute
                         isAuthenticated={isAuthenticated}
                         component={component}
@@ -77,9 +75,12 @@ const AppRoutes = () => {
                   }
                 />
               );
-            }
+            },
           )}
         </Route>
+        <Route path='/posts' element={<Posts />} />
+        <Route path='/posts/add' element={<CreatePost />} />
+        <Route path='/posts/view/:id' element={<PostById />} />
         {/* <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
         <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} /> */}
         {/* <Route path={"*"} element={<PageNotFound />} /> */}

@@ -12,6 +12,7 @@
   "dependencies": {
     "@loadable/component": "^5.16.4",
     "@reduxjs/toolkit": "^2.5.0",
+    "@tanstack/react-query": "^5.64.2",
     "antd": "^5.23.1",
     "axios": "^1.7.9",
     "react": "^19.0.0",
