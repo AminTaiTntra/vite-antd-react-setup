@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  app:
+    container_name: vite-react-app
+    image: vite-react-app
+
+    env_file:
+      - .env
+    build:
+      context: .
+    command: bash -c "yarn start"
+    volumes:
+      - ./src:/app/src
+    networks:
+      - react-network
+
+networks:
+  setu-network:
+    external: true
