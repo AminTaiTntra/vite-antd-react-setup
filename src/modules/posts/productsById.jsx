@@ -12,9 +12,8 @@ const fetchPosts = async (id) => {
 export const PostById = () => {
   const location = useLocation();
 
-  const id = location.pathname.split("/");
+  const id = location.pathname.split("/").at(-1);
 
-  console.log("id", id, location);
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts", id],
     queryFn: () => fetchPosts(id),
