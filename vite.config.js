@@ -39,15 +39,15 @@ export default defineConfig({
       },
     },
   },
-  // optimizeDeps: {
-  //   force: true,
-  //   esbuildOptions: {
-  //     loader: {
-  //       ".js": "jsx",
-  //     },
-  //   },
-  //   include: ["@ant-design/icons"],
-  // },
+  optimizeDeps: {
+    force: true,
+    esbuildOptions: {
+      loader: {
+        ".js": "jsx",
+      },
+    },
+    include: ["@ant-design/icons"],
+  },
   server: {
     host: "0.0.0.0",
     port: 3000,
