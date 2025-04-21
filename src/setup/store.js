@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import thunkMiddleware from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/es/storage"; // defaults to localStorage for web and AsyncStorage for react-native
 import logger from "redux-logger";
@@ -10,22 +9,24 @@ const persistConfig = {
   storage,
 };
 
-// const customizedMiddleware = getDefaultMiddleware({
-//   serializableCheck: false,
-// });
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// const middleware = [thunkMiddleware];
-
-if (import.meta.env.VITE_APP_REDUX_LOGGER != "true") {
-  // middleware.push(logger);
-}
 
 const store = configureStore({
   reducer: persistedReducer,
-  // middleware,
-  // ...customizedMiddleware,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/PAUSE",
+          "persist/PURGE",
+          "persist/REGISTER",
+          "persist/FLUSH",
+        ],
+      },
+    }).concat(logger),
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 const persistor = persistStore(store);

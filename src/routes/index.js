@@ -78,12 +78,6 @@ const AppRoutes = () => {
             },
           )}
         </Route>
-        <Route path='/posts' element={<Posts />} />
-        <Route path='/posts/add' element={<CreatePost />} />
-        <Route path='/posts/view/:id' element={<PostById />} />
-        {/* <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
-        <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} /> */}
-        {/* <Route path={"*"} element={<PageNotFound />} /> */}
       </Routes>
     </BrowserRouter>
   );

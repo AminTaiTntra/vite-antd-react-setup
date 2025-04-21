@@ -23,7 +23,6 @@ const CustomControlledInput = ({
   status,
   readOnly,
 }) => {
-  //   const [{ onKeyDownPress, onPaste }] = useInputWheel({ type });
 
   return (
     <div
@@ -51,8 +50,8 @@ const CustomControlledInput = ({
         allowClear={allowClear}
         prefix={prefix}
         autoComplete={"off"}
-        onKeyDown={onKeyDownPress}
-        onPaste={onPaste}
+        // onKeyDown={onKeyDownPress}
+        // onPaste={onPaste}
         onPressEnter={onPressEnter}
         className={className}
       />
