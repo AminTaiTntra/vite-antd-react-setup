@@ -1,100 +1,66 @@
-import { Layout, Menu } from 'antd';
+import  { useState } from 'react';
 import {
-  Gauge,
-  CalendarCheck,
-  User2,
-  Users2,
-  ChevronRight,
-  X,
-  ChevronRightCircle,
-} from 'lucide-react';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+  AppstoreOutlined,
+  ContainerOutlined,
+  DesktopOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons';
+import { Button, Menu } from 'antd';
 
-const { Sider } = Layout;
 
-const SideBarLayout = ({ collapsed, setCollapsed }) => {
-  const route = useLocation();
-  const [toggled, setToggled] = useState(false);
-
-  const menuItems = [
-    {
-      key: '/',
-      icon: <Gauge className="text-xl" />,
-      label: 'Dashboard',
-    },
-    {
-      key: '/analytics',
-      icon: <ChevronRightCircle className="text-xl" />,
-      label: 'Analytics',
-    },
-    {
-      key: '/calendar',
-      icon: <CalendarCheck className="text-xl" />,
-      label: 'Calendar',
-    },
-    {
-      key: '/profile',
-      icon: <User2 className="text-xl" />,
-      label: 'Profile',
-    },
-    {
-      key: 'users',
-      icon: <Users2 className="text-xl" />,
-      label: 'Users',
-      children: [
-        { key: '/users/customer', label: 'Customer' },
-        { key: '/users/manager', label: 'Manager' },
-        { key: '/users/secretary', label: 'Secretary' },
-      ],
-    },
-    {
-      key: 'ecommerce',
-      icon: <ChevronRight className="text-xl" />,
-      label: 'E-commerce',
-      children: [
-        { key: '/ecommerce/products', label: 'Products' },
-        { key: '/ecommerce/orders', label: 'Orders' },
-      ],
-    },
-  ];
-
+const items = [
+  { key: '1', icon: <PieChartOutlined  />, label: 'Option 1' },
+  { key: '2', icon: <DesktopOutlined />, label: 'Option 2' },
+  { key: '3', icon: <ContainerOutlined />, label: 'Option 3' },
+  {
+    key: 'sub1',
+    label: 'Navigation One',
+    icon: <MailOutlined />,
+    children: [
+      { key: '5', label: 'Option 5' },
+      { key: '6', label: 'Option 6' },
+      { key: '7', label: 'Option 7' },
+      { key: '8', label: 'Option 8' },
+    ],
+  },
+  {
+    key: 'sub2',
+    label: 'Navigation Two',
+    icon: <AppstoreOutlined />,
+    children: [
+      { key: '9', label: 'Option 9' },
+      { key: '10', label: 'Option 10' },
+      {
+        key: 'sub3',
+        label: 'Submenu',
+        children: [
+          { key: '11', label: 'Option 11' },
+          { key: '12', label: 'Option 12' },
+        ],
+      },
+    ],
+  },
+];
+const SideBarLayout = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
   return (
-    <Sider
-      collapsible
-      collapsed={collapsed}
-      onCollapse={setCollapsed}
-      style={{
-        height: '100vh',
-        backgroundColor: '#1e293b',
-        color: '#ffffff',
-      }}
-    >
-      {/* Header Section */}
-      <div
-        style={{
-          padding: '16px',
-          textAlign: 'center',
-          color: '#ffffff',
-          fontWeight: 'bold',
-        }}
-      >
-        {collapsed ? 'MBK' : 'Mohammad Baqer Kohie'}
-      </div>
-
-      {/* Menu Section */}
+    <div style={{ width: 256, background:'#001529' }} >
+      <h1 className='text-xl font-bold text-center mt-4 mb-4 text-[#8338ec]'>SCALER</h1>
       <Menu
-        theme="dark"
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
         mode="inline"
-        selectedKeys={[route.pathname]}
-        items={menuItems}
-        style={{
-          backgroundColor: '#1e293b',
-          color: '#ffffff',
-        }}
+        theme="dark"
+        // inlineCollapsed={collapsed}
+        items={items}
       />
-    </Sider>
+    </div>
   );
 };
-
 export default SideBarLayout;

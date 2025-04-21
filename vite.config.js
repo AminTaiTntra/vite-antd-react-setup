@@ -1,5 +1,6 @@
 import { defineConfig, transformWithEsbuild } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [
@@ -16,6 +17,7 @@ export default defineConfig({
       },
     },
     react(),
+    tailwindcss()
   ],
   esbuild: {
     jsxInject: `import React from 'react'`,

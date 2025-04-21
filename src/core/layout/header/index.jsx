@@ -1,59 +1,26 @@
-import { Layout } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { setSideMenuStatus } from "../../../redux/actions/sidebar";
-// import Notification from "./notification";
-// import Profile from "./profile";
-// import useHeader from "./hooks/useHeader";
+import { Layout, Menu } from "antd";
 
-const { Header } = Layout;
 
-const CustomHeader = ({ pageTitle = null }) => {
-  //   const [
-  //     { isNotifDropdownOpen, isNotifTooltipOpen, isProfileDropdownOpen },
-  //     {
-  //       handleNotifDropdownChange,
-  //       handleNotifTooltipChange,
-  //       handleProfileDropdownChange,
-  //     },
-  //   ] = useHeader();
+const CustomHeader = () => {
+  const { Header } = Layout;
 
-  const sideMenuStatus = useSelector(
-    (state) => state?.sidebarMenu?.sideMenuStatus
-  );
-
-  const dispatch = useDispatch();
-
-  const handleDrawerToggle = () => {
-    dispatch(setSideMenuStatus(!sideMenuStatus));
-    if (document.body.classList.contains("collapse-menu")) {
-      document.body.classList.remove("collapse-menu");
-    } else {
-      document.body.classList.add("collapse-menu");
-    }
-  };
+  const items1 = ['1', '2', '3'].map(key => ({
+    key,
+    label: `nav ${key}`,
+  }));
 
   return (
-    <Header className={"site-layout-background"}>
-      <div className={"header-topbar-left"}>
-        <a className={"trigger"} onClick={() => handleDrawerToggle()}>
-          {sideMenuStatus ? <RightOutlined /> : <LeftOutlined />}
-        </a>
-        <h1 className={"header-main-title"}>{pageTitle}</h1>
-      </div>
-      {/* <div className={"header-topbar-right"}>
-        <Notification
-          isNotifDropdownOpen={isNotifDropdownOpen}
-          isNotifTooltipOpen={isNotifTooltipOpen}
-          handleNotifDropdownChange={handleNotifDropdownChange}
-          handleNotifTooltipChange={handleNotifTooltipChange}
+      <Header style={{ display: 'flex', alignItems: 'center' }}>
+        {/* <div className="demo-logo" /> */}
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']}
+          items={items1}
+          style={{ flex: 1, minWidth: 0 }}
         />
-        <Profile
-          isProfileDropdownOpen={isProfileDropdownOpen}
-          handleProfileDropdownChange={handleProfileDropdownChange}
-        />
-      </div> */}
-    </Header>
-  );
-};
+      </Header>
+  )
+}
+
 export default CustomHeader;

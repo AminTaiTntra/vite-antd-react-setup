@@ -32,7 +32,7 @@ const CustomControlledInput = ({
     >
       {label && (
         <label>
-          {isRequired && <span className="required">* </span>}
+          {isRequired && <span className="required text-red-500">* </span>}
           {label}
         </label>
       )}
@@ -55,8 +55,8 @@ const CustomControlledInput = ({
         onPressEnter={onPressEnter}
         className={className}
       />
-      {showError && error && <span className="error-text">{error}</span>}
-      {!error && status && <span className="error-text">{status}</span>}
+      {showError && error && <span className="error-text text-red-500 mt-4">{error}</span>}
+      {!error && status && <span className="error-text text-red-500">{status}</span>}
     </div>
   );
 };
