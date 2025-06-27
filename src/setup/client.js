@@ -1,9 +1,9 @@
 import store from "./store";
-import { logout, setAccessToken } from "../actions/loginAction";
 import axios from "axios";
-import endpoints from "../api/endpoints";
 import { getBaseURL } from "../utility/apiMethods";
 import API_STATUS from "./apiStatus";
+import { setAccessToken } from "../redux/actions/login";
+import endpoints from "../api/endpoint";
 
 const PUBLIC_ROUTES = ["login", "confirm-reset-password"];
 

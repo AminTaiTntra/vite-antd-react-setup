@@ -1,6 +1,6 @@
 import API_STATUS from "../setup/apiStatus";
-import { showError, showSuccess } from "../utility/other";
 import { useEffect, useState } from "react";
+import { showError, showSuccess } from "../utility/methods.js";
 
 const useFetchData = ({
   apiFunction,

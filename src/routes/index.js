@@ -77,6 +77,14 @@ const AppRoutes = () => {
             },
           )}
         </Route>
+        <Route
+          path='*'
+          element={
+            <ErrorBoundary key='/' FallbackComponent={CustomErrorBoundary}>
+              <WithAuthenticationLayout>No</WithAuthenticationLayout>
+            </ErrorBoundary>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

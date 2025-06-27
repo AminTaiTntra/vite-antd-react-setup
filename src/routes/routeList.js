@@ -1,6 +1,15 @@
 import Login from "../modules/authentication/login";
 import Dashboard from "../modules/dashboard";
+import UserManagement from "../modules/userManagement";
 import ROUTES from "./routeMapper";
+
+const adminRouteList = [
+  {
+    path: ROUTES.userList,
+    component: UserManagement,
+    pageTitle: "User List",
+  },
+];
 
 export const RouteList = [
   {
@@ -13,4 +22,5 @@ export const RouteList = [
     component: Dashboard,
     pageTitle: "Dashboard",
   },
+  ...adminRouteList,
 ];

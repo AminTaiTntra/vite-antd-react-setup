@@ -1,3 +1,4 @@
+const prefix = '/api/v1'
 const endpoints = {
   common: {
     changePassword: "/user/change-password/",
@@ -11,6 +12,12 @@ const endpoints = {
     getResetPassword: (body) =>
       `/user/confirm-reset-password/${body?.uid}/${body?.token}/`,
   },
+  userManagement: {
+    list: `${prefix}/users`
+  },
+  authentication: {
+    login: `${prefix}/auth/login`
+  }
 };
 
 export default endpoints;

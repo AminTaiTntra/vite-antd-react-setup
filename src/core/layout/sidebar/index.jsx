@@ -1,45 +1,108 @@
 import { useState } from "react";
 import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  PieChartOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from "react-pro-sidebar";
+import { Button, Layout, Menu, theme } from "antd";
+import { useNavigate } from "react-router-dom";
+const { Header, Sider, Content } = Layout;
 
-const SideBarLayout = () => {
+const SideBarLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
+  const SideMenuList = [
+    {
+      key: "admin-dashboard",
+      icon: <UserOutlined />,
+      label: "Admin Dashboard",
+      path: "/dashboard",
+    },
+    {
+      key: "user-management",
+      icon: <VideoCameraOutlined />,
+      label: "User Management",
+      path: "/user-list",
+    },
+    {
+      key: "regulatory-requirements",
+      icon: <UploadOutlined />,
+      label: "Regulatory Requirements",
+      path: "regulatory-requirements",
+    },
+  ];
+
+  const navigate = useNavigate();
 
   return (
-    <Sidebar collapsed={collapsed} style={{ height: "100vh" }}>
-      <div className='flex justify-between items-center px-4 py-3'>
-        {!collapsed && <h1 className='text-xl font-bold'>iKyzen</h1>}
-        <button className='text-lg' onClick={() => setCollapsed((prev) => !prev)}>
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </button>
-      </div>
+    <Layout>
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        {/* Logo Area */}
+        <div
+          style={{
+            height: 64,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 16,
+            backgroundColor: "white",
+          }}
+        >
+          <img
+            src='/logo2.png'
+            alt='Logo'
+            style={{
+              height: 80,
+              objectFit: "contain",
+              transition: "all 0.3s",
+              ...(collapsed && { width: 64 }),
+            }}
+          />
+        </div>
 
-      <Menu>
-        <MenuItem icon={<PieChartOutlined />}>Admin Dashboard</MenuItem>
-        <MenuItem icon={<DesktopOutlined />}>Updates, News & Events</MenuItem>
-
-        <SubMenu label='Regulatory Requirements' icon={<MailOutlined />}>
-          <MenuItem>Option 5</MenuItem>
-          <MenuItem>Option 6</MenuItem>
-          <MenuItem>Option 7</MenuItem>
-          <MenuItem>Option 8</MenuItem>
-        </SubMenu>
-        <MenuItem icon={<DesktopOutlined />}>Group Legislations</MenuItem>
-        <MenuItem icon={<DesktopOutlined />}>Organisations</MenuItem>
-        <MenuItem icon={<DesktopOutlined />}>Activity Logs</MenuItem>
-        <MenuItem icon={<DesktopOutlined />}>Countries</MenuItem>
-        <MenuItem icon={<DesktopOutlined />}>Users</MenuItem>
-        <MenuItem icon={<DesktopOutlined />}>Companies</MenuItem>
-      </Menu>
-    </Sidebar>
+        <Menu
+          theme='dark'
+          mode='inline'
+          defaultSelectedKeys={SideMenuList.at(0).key}
+          items={SideMenuList.map((item) => ({
+            key: item.key,
+            icon: item.icon,
+            label: item.label,
+            onClick: () => navigate(item.path),
+          }))}
+        />
+      </Sider>
+      <Layout>
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <Button
+            type='text'
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: "16px",
+              width: 64,
+              height: 64,
+            }}
+          />
+        </Header>
+        <Content
+          style={{
+            margin: "24px 16px",
+            padding: 24,
+            minHeight: 280,
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          {children}
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 

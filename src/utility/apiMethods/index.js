@@ -1,4 +1,4 @@
-export const getBaseURL = () => {
+ const getBaseURL = () => {
   if (!import.meta.env.VITE_APP_ENV) {
     return import.meta.env.VITE_APP_LOCAL_URL;
   } else if (import.meta.env.VITE_APP_ENV === "QATest") {
