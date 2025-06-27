@@ -10,15 +10,15 @@ const CustomHeader = () => {
   }));
 
   return (
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
+      <Header>
         {/* <div className="demo-logo" /> */}
-        <Menu
+        {/* <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
           items={items1}
           style={{ flex: 1, minWidth: 0 }}
-        />
+        /> */}
       </Header>
   )
 }

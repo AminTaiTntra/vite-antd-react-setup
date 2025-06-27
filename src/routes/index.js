@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import loadable from "@loadable/component";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ErrorBoundary } from "react-error-boundary";
@@ -24,7 +23,7 @@ import { PostById } from "../modules/posts/productsById";
 // const PageNotFound = loadable(() => import("../modules/pageNotFound"), {
 //   fallback: <RouteFallback />,
 // });
-const Login = loadable(() => import("../modules/authentication/login"), {
+const Login = React.lazy(() => import("../modules/authentication/login"), {
   fallback: <RouteFallback />,
 });
 
